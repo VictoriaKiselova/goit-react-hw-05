@@ -1,0 +1,15 @@
+.link{
+    display: inline-flex;
+    gap: 10px;
+    padding: 8px;
+    list-style: none;
+    color: #fff; 
+    text-decoration: none;
+}
+.link:hover{
+    color: rgb(211, 84, 207);
+    background-color: #fff;
+}
+.active{
+    background-color: rgb(211, 84, 207);
+}

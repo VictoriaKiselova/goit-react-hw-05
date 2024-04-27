@@ -1,0 +1,14 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.contentColor {
+  color: #fff;
+}
+.contentColor:hover {
+  color: rgb(211, 84, 207);
+}
+.active {
+  color: rgb(211, 84, 207);
+}
