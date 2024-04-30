@@ -1,18 +1,23 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { nanoid } from "nanoid";
 import css from "./MovieList.module.css";
 import clsx from "clsx";
-import { nanoid } from "nanoid";
 
 const linkListMovie = ({ isActive }) => {
   return clsx(css.contentColor, isActive && css.active);
 };
 
-export default function MovieList({ trendingMovies }) {
+export default function MovieList({ trendingMovies, searchMovie }) {
+  const locationListMovie = useLocation();
+  const backLinkHref = locationListMovie.state ?? "/movies";
+
+  const listMovies = searchMovie || trendingMovies;
   return (
     <ul className={css.list}>
-      {trendingMovies.map(elem => (
+      {listMovies.map(elem => (
         <NavLink
           to={`/movies/${elem.id}`}
+          state={backLinkHref}
           className={linkListMovie}
           key={nanoid()}>
           <li>{elem.title}</li>

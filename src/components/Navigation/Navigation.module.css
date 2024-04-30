@@ -1,15 +1,20 @@
-.link{
-    display: inline-flex;
-    gap: 10px;
-    padding: 8px;
-    list-style: none;
-    color: #fff; 
-    text-decoration: none;
+.navConteiner {
+  display: flex;
+  gap: 5px;
 }
-.link:hover{
-    color: rgb(211, 84, 207);
-    background-color: #fff;
+.link {
+  display: inline-flex;
+  padding: 8px;
+  list-style: none;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 3px;
+  filter: drop-shadow(5px 5px 5px rgb(17, 9, 16));
 }
-.active{
-    background-color: rgb(211, 84, 207);
+.link:hover {
+  color: rgb(211, 84, 207);
+  background-color: #fff;
+}
+.active {
+  background-color: rgb(211, 84, 207);
 }

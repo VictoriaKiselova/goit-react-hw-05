@@ -1,0 +1,21 @@
+.containerCast {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.listCast {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.actorImage {
+  width: 110px;
+  height: 150px;
+}
+.text {
+  font-size: 18px;
+  line-height: 16px;
+  margin: 0;
+  color: #fff;
+  letter-spacing: normal;
+}
