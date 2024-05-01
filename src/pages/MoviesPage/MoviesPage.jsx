@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { fetchSearchMovie } from "../../articles-api.js";
 import Loader from "../../components/Loader/Loader.jsx";
 import NotFoundPage from "../NotFoundPage/NotFoundPage.jsx";
@@ -6,31 +7,38 @@ import MovieList from "../../components/MovieList/MovieList.jsx";
 import css from "./MoviesPage.module.css";
 
 export default function MoviesPage() {
-  const [searchMovie, setSearchMovie] = useState(null);
+  const [searchMovie, setSearchMovie] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  async function getSearchMovies(event) {
+  const handleSubmit = event => {
     event.preventDefault();
     const queryMovie = event.target.elements.query.value;
+    setSearchParams(queryMovie);
+  };
 
-    if (queryMovie === "") {
-      return;
+  useEffect(() => {
+    async function getSearchMovies() {
+      if (searchParams === "") {
+        return;
+      }
+      try {
+        setLoading(true);
+        const data = await fetchSearchMovie(searchParams);
+        setSearchMovie(data.results);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
     }
-    try {
-      setLoading(true);
-      const data = await fetchSearchMovie(queryMovie);
-      setSearchMovie(data.results);
-    } catch (error) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  }
+    getSearchMovies();
+  }, [searchParams]);
 
   return (
     <div>
-      <form onSubmit={getSearchMovies} className={css.form}>
+      <form onSubmit={handleSubmit} className={css.form}>
         <input type="text" name="query" className={css.title} />
         <button type="submit" className={css.button}>
           Search

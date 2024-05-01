@@ -1,4 +1,4 @@
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, Suspense, useRef } from "react";
 import { detailsMovies } from "../../articles-api.js";
 import { Link, Outlet, useParams, useLocation } from "react-router-dom";
 import { nanoid } from "nanoid";
@@ -12,8 +12,8 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
   const locationDetailsPage = useLocation();
+  const locationStateRef = useRef(locationDetailsPage.state);
 
   useEffect(() => {
     async function getDetailsMovies() {
@@ -37,7 +37,7 @@ export default function MovieDetailsPage() {
           <Loader />
         </b>
       )}
-      <Link to={locationDetailsPage.state} className={css.buttonBack}>
+      <Link to={locationStateRef.current} className={css.buttonBack}>
         <ImArrowLeft2 /> Go back
       </Link>
       {movie && (
@@ -76,7 +76,7 @@ export default function MovieDetailsPage() {
                 <li>
                   <Link
                     to="cast"
-                    state={locationDetailsPage.state}
+                    state={locationStateRef.current}
                     className={css.link}>
                     Cast
                   </Link>
@@ -84,7 +84,7 @@ export default function MovieDetailsPage() {
                 <li>
                   <Link
                     to="reviews"
-                    state={locationDetailsPage.state}
+                    state={locationStateRef.current}
                     className={css.link}>
                     Reviews
                   </Link>

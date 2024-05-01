@@ -9,6 +9,6 @@
 .contentColor:hover {
   color: rgb(211, 84, 207);
 }
-.active {
-  color: rgb(211, 84, 207);
+.link {
+  text-decoration: none;
 }
