@@ -15,17 +15,18 @@ export default function MoviesPage() {
   const handleSubmit = event => {
     event.preventDefault();
     const queryMovie = event.target.elements.query.value;
-    setSearchParams(queryMovie);
+    setSearchParams({ query: queryMovie });
   };
 
   useEffect(() => {
     async function getSearchMovies() {
-      if (searchParams === "") {
+      const query = searchParams.get("query");
+      if (!query) {
         return;
       }
       try {
         setLoading(true);
-        const data = await fetchSearchMovie(searchParams);
+        const data = await fetchSearchMovie(query);
         setSearchMovie(data.results);
       } catch (error) {
         setError(true);
